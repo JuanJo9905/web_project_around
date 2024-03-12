@@ -1,7 +1,7 @@
 .popup{
   display: flex;
   justify-content: center;
-  margin-left:35% ;
+  margin-left:35%;
   position: fixed;
   color: #000;
   height: 50%;
@@ -64,10 +64,10 @@
   justify-items: center;
   padding: 15px 0 15px 20px;
   border-radius: 4px;
-  font-family: Inter;
+  font-family:Inter;
   font-style: normal;
   font-weight: normal;
-  font-size: 20px;
+  font-size:20px;
   line-height: 30px;
   color: #838383;
 }
