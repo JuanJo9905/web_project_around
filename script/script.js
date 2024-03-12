@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-  let addButton = document.querySelector('.content__explorer_add-enable');
+  let addButton = document.querySelector('.content__explorer-add-enable');
   let popupWindow = document.querySelector('.popup__window');
   let popupButton = document.querySelector('.popup__close');
 
@@ -20,29 +20,29 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 document.addEventListener("DOMContentLoaded", function() {
-  let gridImages = document.querySelectorAll('.content__grid_image');
-  let popupWindow = document.querySelector('.content__grid_poster');
-  let popupButton = document.querySelector('.content__grid_poster-close');
+  let gridImages = document.querySelectorAll('.content__grid-image');
+  let popupWindow = document.querySelector('.content__grid-poster');
+  let popupButton = document.querySelector('.content__grid-poster-close');
 
   if (gridImages.length > 0 && popupWindow && popupButton) {
     gridImages.forEach(function(gridImage) {
       gridImage.addEventListener('click', function(event) {
         let image = event.target.getAttribute('src');
-        let name = event.target.parentElement.querySelector('.content__grid_card-name').textContent;
+        let name = event.target.parentElement.querySelector('.content__grid-card-name').textContent;
 
         let posterImage = `url(${image})`;
 
-        let posterImageElement = document.querySelector('.content__grid_poster-image');
-        let posterNameElement = document.querySelector('.content__grid_poster-name');
+        let posterImageElement = document.querySelector('.content__grid-poster-image');
+        let posterNameElement = document.querySelector('.content__grid-poster-name');
 
         posterImageElement.style.backgroundImage = posterImage;
         posterNameElement.textContent = name;
 
-        popupWindow.classList.add("content__grid_poster-enabled");
+        popupWindow.classList.add("content__grid-poster-enabled");
       });
     });
     popupButton.addEventListener('click', function(){
-      popupWindow.classList.remove("content__grid_poster-enabled");
+      popupWindow.classList.remove("content__grid-poster-enabled");
     });
   } else {
     console.error("No se pudo encontrar uno o ambos elementos.");
@@ -51,24 +51,24 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 let cardContainer = document.querySelector('.content__grid');
-let addButton = document.querySelector('.popup__window_form-button');
-let deleteButton = document.querySelectorAll('.content__grid_image-delete');
+let addButton = document.querySelector('.popup__window-form-button');
+let deleteButton = document.querySelectorAll('.content__grid-image-delete');
 
 function addCard() {
-  let image = document.querySelector('#popup__window_form-link');
-  let name = document.querySelector('#popup__window_form-title');
+  let image = document.querySelector('#popup__window-form-link');
+  let name = document.querySelector('#popup__window-form-title');
   cardContainer.insertAdjacentHTML('beforeend', `
-    <div class="content__grid_card">
-      <img src="${image.value}" alt="New Image" class="content__grid_image">
-      <img src="./images/Trash.svg" alt="eliminar" class="content__grid_image-delete">
-      <div class="content__grid_card-description">
-        <p class="content__grid_card-name">${name.value}</p><img src="./images/like.svg" alt="like" class="content__grid_like">
+    <div class="content__grid-card">
+      <img src="${image.value}" alt="New Image" class="content__grid-image">
+      <img src="./images/Trash.svg" alt="eliminar" class="content__grid-image-delete">
+      <div class="content__grid-card-description">
+        <p class="content__grid-card-name">${name.value}</p><img src="./images/like.svg" alt="like" class="content__grid-like">
       </div>
     </div>
   `);
 image.value = '';
 name.value = '';
-deleteButton = document.querySelectorAll('.content__grid_image-delete');
+deleteButton = document.querySelectorAll('.content__grid-image-delete');
 console.log(deleteButton);
 deleteButton.forEach(function(deleteButton) {
   deleteButton.addEventListener("click", function(event) {

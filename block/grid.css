@@ -12,28 +12,28 @@
   width: 70%;
 }
 
-.content__grid_card{
+.content__grid-card{
   position: relative;
 }
-.content__grid_image{
+.content__grid-image{
   width: 100%;
   height: 80%;
   border-top-left-radius: 5%;
   border-top-right-radius: 5%;
 }
 
-.content__grid_image-delete{
+.content__grid-image-delete{
   position: absolute;
   right: 5%;
   top: 5%;
 }
 
-.content__grid_image-delete:hover{
+.content__grid-image-delete:hover{
   opacity: 70%;
   cursor: pointer;
 }
 
-.content__grid_card-description{
+.content__grid-card-description{
   display: flex;
   justify-content: space-between;
   color: black;
@@ -43,7 +43,7 @@
   font-weight: bolder;
 }
 
-.content__grid_poster{
+.content__grid-poster{
   top: 13%;
   width: 34%;
   height: 75%;
@@ -51,16 +51,16 @@
   visibility: hidden;
 }
 
-.content__grid_poster-enabled{
+.content__grid-poster-enabled{
   visibility: visible;
 }
-.content__grid_poster-close{
+.content__grid-poster-close{
   position: absolute;
   top: 2%;
   right: 2%;
 }
 
-.content__grid_poster-image{
+.content__grid-poster-image{
   height: 80%;
   background-image: url("../images/lake.jpg");
   background-repeat: no-repeat;
@@ -70,7 +70,7 @@
   margin-right: 10%;
 }
 
-.content__grid_poster-close:hover{
+.content__grid-poster-close:hover{
   opacity: 70%;
   cursor: pointer;
 }
@@ -83,7 +83,7 @@
     flex-direction: column;
   }
 
-  .content__grid_poster{
+  .content__grid-poster{
     top: 13%;
     width: 80%;
     height: 80%;

@@ -44,15 +44,15 @@
   cursor: pointer;
 }
 
-.popup__window_title{
+.popup__window-title{
   font-weight: bolder;
 }
 
-.popup__window_form{
+.popup__window-form{
   display: flex;
   flex-direction: column;
 }
-.popup__window_form-input{
+.popup__window-form-input{
   border: none;
   border-bottom: 1px solid black;
   width: 100%;
@@ -70,7 +70,7 @@
   color: #838383;
 }
 
-.popup__window_form-button{
+.popup__window-form-button{
   margin-top: 32px;
   max-width: 385px;
   height: 60px;
@@ -86,7 +86,7 @@
   margin-left: 5%;
 }
 
-.popup__window_form-button:hover{
+.popup__window-form-button:hover{
   opacity: 70%;
   cursor: pointer;
 }
