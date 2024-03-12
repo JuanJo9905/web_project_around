@@ -59,14 +59,13 @@
   height: 60px;
   box-sizing: border-box;
   margin-top: 8px;
-  font-size: 14px;
   font-family: inherit;
   justify-items: center;
   padding: 15px 0 15px 20px;
   border-radius: 4px;
   font-style: normal;
   font-weight: normal;
-  font-size: medium;
+  font-size: 20px;
   line-height: 30px;
   color: #838383;
 }
