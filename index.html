@@ -20,7 +20,7 @@
       <section class="explorer">
         <div class="content__explorer">
           <div class="content__explorer-image">
-            <img src="./images/Avatar.png" alt="avatar">
+            <img src="./images/Avatar.png" class="content__explorer-image-image" alt="avatar">
           </div>
           <div class="content__explorer-info">
             <div class="content__explorer-info-top">
@@ -70,6 +70,17 @@
             <input type="text" id="popup__window-form-title" class="popup__window-form-input"  name="popup__window-form-title" placeholder="Titulo" required>
             <input type="text" id="popup__window-form-link"  class="popup__window-form-input"  name="popup__window-form-link" placeholder="Enlace a la imagen" required>
             <button type="submit" class="popup__window-form-button">Crear</button>
+          </form>
+        </div>
+      </section>
+      <section class="edit">
+        <img src="./images/Close_Icon.png" class="edit__close" alt="close">
+        <div class="edit__window">
+          <form action="javascript:editExplorer()" class="edit__window-form">
+            <input type="text" id="edit__window-form-name" class="edit__window-form-input"  name="content__edit-form-title" placeholder="Nombre" required>
+            <input type="text" id="edit__window-form-title" class="edit__window-form-input"  name="edit__window-form-title" placeholder="Trabajo" required>
+            <input type="text" id="edit__window-form-link"  class="edit__window-form-input"  name="edit__window-form-link" placeholder="Enlace a la imagen" required>
+            <button type="submit" class="edit__window-form-button">Guardar</button>
           </form>
         </div>
       </section>

@@ -20,6 +20,27 @@ document.addEventListener("DOMContentLoaded", function() {
 
 
 document.addEventListener("DOMContentLoaded", function() {
+  let edit = document.querySelector('.content__explorer-edit-enable');
+  let editWindow = document.querySelector('.edit');
+  let editButton = document.querySelector('.edit__close');
+
+  if (edit && editWindow && editButton) {
+    edit.addEventListener('click', function(){
+      editWindow.classList.toggle("edit__window-enabled");
+      editButton.classList.toggle("edit__close-enabled");
+    });
+
+    editButton.addEventListener('click', function(){
+      editWindow.classList.remove("edit__window-enabled");
+      editButton.classList.remove("edit__close-enabled");
+    });
+  } else {
+    console.error("No se pudo encontrar uno o ambos elementos.");
+  }
+});
+
+
+document.addEventListener("DOMContentLoaded", function() {
   let gridImages = document.querySelectorAll('.content__grid-image');
   let popupWindow = document.querySelector('.content__grid-poster');
   let popupButton = document.querySelector('.content__grid-poster-close');
@@ -53,6 +74,7 @@ document.addEventListener("DOMContentLoaded", function() {
 let cardContainer = document.querySelector('.content__grid');
 let addButton = document.querySelector('.popup__window-form-button');
 let deleteButton = document.querySelectorAll('.content__grid-image-delete');
+let editButton = document.querySelector('.edit__window-form-button');
 
 function addCard() {
   let image = document.querySelector('#popup__window-form-link');
@@ -79,7 +101,28 @@ deleteButton.forEach(function(deleteButton) {
 });
 };
 
+function editExplorer(){
+  let name = document.querySelector('#edit__window-form-name');
+  let job = document.querySelector('#edit__window-form-title');
+  let link = document.querySelector('#edit__window-form-link');
+
+  let nameExplorer = document.querySelector('.content__explorer-name');
+  let jobExplorer = document.querySelector('.content__explorer-job');
+  let imageExplorer = document.querySelector('.content__explorer-image-image');
+
+  console.log('nombre: ',nameExplorer);
+  console.log('trabajo: ',jobExplorer);
+  console.log('imagen: ',imageExplorer);
+
+  nameExplorer.textContent = name.value;
+  imageExplorer.src = link.value;
+  jobExplorer.textContent = job.value;
+
+}
+
 addButton.addEventListener('click', addCard);
+
+//editButton.addEventListener('click',editExplorer);
 
 deleteButton.forEach(function(deleteButton) {
   deleteButton.addEventListener("click", function(event) {
