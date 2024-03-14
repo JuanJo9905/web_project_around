@@ -47,10 +47,6 @@
   cursor: pointer;
 }
 
-.edit__window-title{
-  font-weight: bolder;
-}
-
 .edit__window-form{
   display: flex;
   flex-direction: column;
