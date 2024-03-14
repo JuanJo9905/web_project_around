@@ -44,6 +44,8 @@ document.addEventListener("DOMContentLoaded", function() {
   let gridImages = document.querySelectorAll('.content__grid-image');
   let popupWindow = document.querySelector('.content__grid-poster');
   let popupButton = document.querySelector('.content__grid-poster-close');
+  let popupWindowE = document.querySelector('.popup__window');
+  let popupButtonE = document.querySelector('.popup__close');
 
   if (gridImages.length > 0 && popupWindow && popupButton) {
     gridImages.forEach(function(gridImage) {
@@ -65,9 +67,12 @@ document.addEventListener("DOMContentLoaded", function() {
     popupButton.addEventListener('click', function(){
       popupWindow.classList.remove("content__grid-poster-enabled");
     });
+
   } else {
     console.error("No se pudo encontrar uno o ambos elementos.");
   }
+  popupWindowE.classList.remove("popup__window-enabled");
+  popupButtonE.classList.remove("popup__close-enabled");
 });
 
 
@@ -104,20 +109,17 @@ deleteButton.forEach(function(deleteButton) {
 function editExplorer(){
   let name = document.querySelector('#edit__window-form-name');
   let job = document.querySelector('#edit__window-form-title');
-  let link = document.querySelector('#edit__window-form-link');
+  let editWindow = document.querySelector('.edit');
+  let editButton = document.querySelector('.edit__close');
 
   let nameExplorer = document.querySelector('.content__explorer-name');
   let jobExplorer = document.querySelector('.content__explorer-job');
-  let imageExplorer = document.querySelector('.content__explorer-image-image');
-
-  console.log('nombre: ',nameExplorer);
-  console.log('trabajo: ',jobExplorer);
-  console.log('imagen: ',imageExplorer);
 
   nameExplorer.textContent = name.value;
-  imageExplorer.src = link.value;
   jobExplorer.textContent = job.value;
 
+  editWindow.classList.remove("edit__window-enabled");
+  editButton.classList.remove("edit__close-enabled");
 }
 
 addButton.addEventListener('click', addCard);

@@ -22,6 +22,10 @@
   padding: 5%;
 }
 
+.edit__window-title{
+  font-weight: bolder;
+}
+
 .edit__window-enabled{
   visibility: visible;
 }
