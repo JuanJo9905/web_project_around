@@ -12,7 +12,7 @@ function loadImage(img, name){
   card.querySelector('.content__grid-image-delete').src = '../images/Trash.svg';
   card.querySelector('.content__grid-card-name').textContent = name;
   card.querySelector('.content__grid-like').addEventListener('click',function(evt){
-    evt.target.classList.toggle('.content__grid-like-active');
+    evt.target.classList.toggle('content__grid-like-active');
   });
   card.querySelector('.content__grid-image-delete').addEventListener('click',function(evt){
     const elemento = evt.currentTarget.parentNode;
