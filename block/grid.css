@@ -7,13 +7,15 @@
 .content__grid{
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 33% 33% 33%;
   gap: 20px;
   width: 70%;
+  padding-bottom: 5%;
 }
 
 .content__grid-card{
   position: relative;
+  height: 100%;
 }
 .content__grid-image{
   width: 100%;
@@ -31,6 +33,13 @@
 .content__grid-image-delete:hover{
   opacity: 70%;
   cursor: pointer;
+}
+
+.content__grid-card-name{
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 70% ;
 }
 
 .content__grid-card-description{
