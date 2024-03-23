@@ -1,13 +1,13 @@
 .popup{
   display: flex;
   justify-content: center;
-  margin-left:35%;
   position: fixed;
   color: #000;
   height: 50%;
   width: 34%;
   visibility: hidden;
   top: 20%;
+  margin-left: 20%;
 }
 
 .popup__window{

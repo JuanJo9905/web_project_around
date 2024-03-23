@@ -1,5 +1,14 @@
-// NUEVO
 const cardsContainer = document.querySelector('.content__grid');
+/**
+ * Muestra el poster al darle click
+ */
+const gridContainer = document.querySelector('.grid');
+const posterContainer = document.querySelector('.content__grid-poster');
+const posterButton = posterContainer.querySelector('.content__grid-poster-close');
+
+posterButton.addEventListener('click', function(){
+  posterContainer.classList.remove("content__grid-poster-enabled");
+});
 
 /*
   * Carga las imagenes iniciales haciendo uso del template
@@ -9,6 +18,7 @@ function loadImage(img, name){
   const card = cardTemplate.querySelector('.content__grid-card').cloneNode(true);
 
   card.querySelector('.content__grid-image').src = img;
+  card.querySelector('.content__grid-image').alt = name;
   card.querySelector('.content__grid-image-delete').src = '../images/Trash.svg';
   card.querySelector('.content__grid-card-name').textContent = name;
   card.querySelector('.content__grid-like').addEventListener('click',function(evt){
@@ -17,6 +27,24 @@ function loadImage(img, name){
   card.querySelector('.content__grid-image-delete').addEventListener('click',function(evt){
     const elemento = evt.currentTarget.parentNode;
     elemento.remove();
+  });
+
+  card.querySelector('.content__grid-image').addEventListener('click', function(evt) {
+    const image = evt.target.getAttribute('src');
+    const name = evt.target.parentElement.querySelector('.content__grid-card-name').textContent;
+    const posterImageElement = gridContainer.querySelector('.content__grid-poster-image');
+    const posterNameElement = gridContainer.querySelector('.content__grid-poster-name');
+    posterImageElement.src = img;
+    posterImageElement.alt = name;
+    posterNameElement.textContent = name;
+    posterContainer.classList.add("content__grid-poster-enabled");
+    //const posterImage = `url(${image})`;
+    /*const posterImageElement = gridContainer.querySelector('.content__grid-poster-image');
+    const posterNameElement = gridContainer.querySelector('.content__grid-poster-name');
+    posterImageElement.style.backgroundImage = posterImage;
+    posterNameElement.textContent = name;
+    posterContainer.classList.add("content__grid-poster-enabled");
+    */
   });
   cardsContainer.append(card);
 };
@@ -87,30 +115,6 @@ editButton.addEventListener('click', function(){
   editButton.classList.remove("edit__close-enabled");
 });
 
-/**
- * Muestra el poster al darle click
- */
-const gridContainer = document.querySelector('.grid');
-const gridImages = gridContainer.querySelectorAll('.content__grid-image');
-const posterContainer = document.querySelector('.content__grid-poster');
-const posterButton = posterContainer.querySelector('.content__grid-poster-close');
-
-gridImages.forEach(element => {
-element.addEventListener('click', function(event) {
-  const image = event.target.getAttribute('src');
-  const name = event.target.parentElement.querySelector('.content__grid-card-name').textContent;
-  const posterImage = `url(${image})`;
-  const posterImageElement = gridContainer.querySelector('.content__grid-poster-image');
-  const posterNameElement = gridContainer.querySelector('.content__grid-poster-name');
-  posterImageElement.style.backgroundImage = posterImage;
-  posterNameElement.textContent = name;
-  posterContainer.classList.add("content__grid-poster-enabled");
-});
-});
-
-posterButton.addEventListener('click', function(){
-  posterContainer.classList.remove("content__grid-poster-enabled");
-});
 
 /**
  * Añadir una nueva carta

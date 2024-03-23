@@ -8,6 +8,7 @@
   box-sizing: border-box;
   display: grid;
   grid-template-columns: 32% 32% 32%;
+  grid-template-rows: 35% 35% 35%;
   gap: 2%;
   width: 100%;
   padding-bottom: 5%;
@@ -52,28 +53,25 @@
   font-weight: bolder;
 }
 
+/*POSTER*/
 .content__grid-poster{
-  top: 13%;
+  top: 13vh;
   width: 34%;
-  height: 75%;
-  position: absolute;
+  position: fixed;
   visibility: hidden;
 }
-
 .content__grid-poster-enabled{
   visibility: visible;
+}
+.content__grid-poster-top{
+  display: flex;
 }
 .content__grid-poster-close{
   position: absolute;
   top: 2%;
   right: 2%;
 }
-
 .content__grid-poster-image{
-  height: 80%;
-  background-image: url("../images/lake.jpg");
-  background-repeat: no-repeat;
-  background-size: cover;
   overflow: hidden;
   margin-top: 10%;
   margin-right: 10%;
