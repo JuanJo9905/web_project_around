@@ -8,21 +8,22 @@
   box-sizing: border-box;
   display: grid;
   grid-template-columns: 32% 32% 32%;
-  grid-template-rows: 35% 35% 35%;
+  grid-template-rows: 361px 361px 361px 361px 361px 361px;
   gap: 2%;
   width: 100%;
   padding-bottom: 5%;
 }
 
+
 .content__grid-card{
   position: relative;
   height: 100%;
+  border-radius: 10px 10px 0 0;
 }
 .content__grid-image{
   width: 100%;
   height: 80%;
-  border-top-left-radius: 5%;
-  border-top-right-radius: 5%;
+
 }
 
 .content__grid-image-delete{
