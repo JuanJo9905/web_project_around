@@ -1,3 +1,14 @@
+const explorerContainer = document.querySelector('.content__explorer');
+const closeModal = function (event){
+  posterContainer.classList.remove("content__grid-poster-enabled");
+  //popupWindow.classList.remove("popup__window-enabled");
+  //popupButton.classList.remove("popup__close-enabled");
+  //editWindow.classList.remove("edit__window-enabled");
+  //editButton.classList.remove("edit__close-enabled");
+  console.log('Clickeado!');
+};
+
+
 const cardsContainer = document.querySelector('.content__grid');
 /**
  * Muestra el poster al darle click
@@ -38,13 +49,7 @@ function loadImage(img, name){
     posterImageElement.alt = name;
     posterNameElement.textContent = name;
     posterContainer.classList.add("content__grid-poster-enabled");
-    //const posterImage = `url(${image})`;
-    /*const posterImageElement = gridContainer.querySelector('.content__grid-poster-image');
-    const posterNameElement = gridContainer.querySelector('.content__grid-poster-name');
-    posterImageElement.style.backgroundImage = posterImage;
-    posterNameElement.textContent = name;
-    posterContainer.classList.add("content__grid-poster-enabled");
-    */
+    explorerContainer.addEventListener('click', closeModal);
   });
   cardsContainer.append(card);
 };
@@ -105,9 +110,17 @@ const edit = document.querySelector('.content__explorer-edit-enable');
 const editWindow = document.querySelector('.edit');
 const editButton = editWindow.querySelector('.edit__close');
 
+const explorerName = document.querySelector('.content__explorer-name').textContent;
+const explorerJob = document.querySelector('.content__explorer-job').textContent;
+
+
 edit.addEventListener('click', function(){
+  let name = editWindow.querySelector('#edit__window-form-name');
+  let job = editWindow.querySelector('#edit__window-form-title');
   editWindow.classList.add("edit__window-enabled");
   editButton.classList.add("edit__close-enabled");
+  name.value = explorerName;
+  job.value = explorerJob;
 });
 
 editButton.addEventListener('click', function(){
@@ -147,3 +160,88 @@ function editExplorer(){
 }
 
 saveCard.addEventListener('click', addCard);
+saveEdit.addEventListener('click', editExplorer);
+
+
+/**
+ * Manejo de validaciones
+
+*/
+
+// elimina las clases de error de los span segun su nombre
+const hideInputError = (formElement, inputElement) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.remove("form__input_type_error");
+  errorElement.classList.remove("form__input-error_active");
+  errorElement.textContent = "";
+};
+
+// agrega las clases de error a los span segun su id
+const showInputError = (formElement, inputElement, errorMessage, config) => {
+  const errorElement = formElement.querySelector(`.${inputElement.id}-error`);
+  inputElement.classList.add(config.inputErrorClass);
+  errorElement.textContent = errorMessage;
+  errorElement.classList.add("form__input-error_active");
+};
+
+//Valida si el elemento es valido usuando su contenedor(formulario) y su elemento
+const checkInputValidity = (formElement, inputElement, config) => {
+  if (!inputElement.validity.valid) {
+    showInputError(formElement, inputElement, inputElement.validationMessage, config);
+  } else {
+    hideInputError(formElement, inputElement);
+  }
+};
+
+// Verifica si por lo menos uno de los elementos es invalido
+const hasInvalidInput = (inputList) => {
+  return inputList.some((inputElement) => {
+    return !inputElement.validity.valid;
+  });
+};
+
+//Activa o inactiva el botón de acuerdo a la valides de todos los input
+const toggleButtonState = (inputList, buttonElement) => {
+  if (hasInvalidInput(inputList)) {
+    buttonElement.classList.add("button_inactive");
+    buttonElement.removeEventListener('click',addCard);
+    buttonElement.removeEventListener('click',editExplorer);
+
+  } else {
+    buttonElement.classList.remove("button_inactive");
+    saveCard.addEventListener('click', addCard);
+    saveEdit.addEventListener('click', editExplorer);
+  }
+};
+
+const setEventListeners = (inputList, formElement, config) => {
+  const buttonElement = formElement.querySelector(config.submitButtonSelector);
+  toggleButtonState(inputList, buttonElement);
+
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener("input", function () {
+      checkInputValidity(formElement, inputElement, config);
+      toggleButtonState(inputList, buttonElement);
+    });
+  });
+};
+
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
+  formList.forEach((formElement) => {
+    formElement.addEventListener("submit", function (evt) {
+      evt.preventDefault();
+    });
+    const fieldsetList = Array.from(formElement.querySelectorAll(config.inputSelector));
+    setEventListeners(fieldsetList, formElement, config);
+  });
+};
+
+enableValidation({
+  formSelector: ".popup__form",
+  inputSelector: ".popup__input",
+  submitButtonSelector: ".popup__button",
+  inactiveButtonClass: "popup__button_disabled",
+  inputErrorClass: "popup__input_type_error",
+  errorClass: "popup__error_visible"
+});

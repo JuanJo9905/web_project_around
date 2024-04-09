@@ -56,10 +56,12 @@
         <img src="./images/Close_Icon.png" class="popup__close" alt="close">
         <div class="popup__window">
           <h2 class="popup__window-title">Nuevo lugar</h2>
-          <form action="submit" class="popup__window-form">
-            <input type="text" id="popup__window-form-title" class="popup__window-form-input"  name="popup__window-form-title" placeholder="Titulo" required>
-            <input type="text" id="popup__window-form-link"  class="popup__window-form-input"  name="popup__window-form-link" placeholder="Enlace a la imagen" required>
-            <button type="submit" class="popup__window-form-button">Crear</button>
+          <form action="submit" class="popup__window-form popup__form">
+            <input type="text" id="popup__window-form-title" class="popup__window-form-input popup__input"  name="popup__window-form-title" placeholder="Titulo" required>
+            <span class="popup__window-form-title-error popup__window-error"></span>
+            <input type="url" id="popup__window-form-link"  class="popup__window-form-input popup__input"  name="popup__window-form-link" placeholder="Enlace a la imagen" required>
+            <span class="popup__window-form-link-error popup__window-error"></span>
+            <button type="submit" class="popup__window-form-button popup__button">Crear</button>
           </form>
         </div>
       </section>
@@ -67,11 +69,15 @@
         <img src="./images/Close_Icon.png" class="edit__close" alt="close">
         <div class="edit__window">
           <h2 class="edit__window-title">Editar perfil</h2>
-          <form action="javascript:editExplorer()" class="edit__window-form">
-            <input type="text" id="edit__window-form-name" class="edit__window-form-input"  name="content__edit-form-title" placeholder="Nombre" required>
-            <input type="text" id="edit__window-form-title" class="edit__window-form-input"  name="edit__window-form-title" placeholder="Acerca de mi" required>
-            <button type="submit" class="edit__window-form-button">Guardar</button>
+
+          <form class="edit__window-form popup__form" novalidate>
+            <input type="text" id="edit__window-form-name" class="edit__window-form-input popup__input"  name="content__edit-form-title" placeholder="Nombre" required minlength="2">
+            <span class="edit__window-form-name-error edit__window-error"></span>
+            <input type="text" id="edit__window-form-title" class="edit__window-form-input popup__input"  name="edit__window-form-title" placeholder="Acerca de mi" required minlength="2">
+            <span class="edit__window-form-title-error edit__window-error"></span>
+            <button type="submit" class="edit__window-form-button popup__button">Guardar</button>
           </form>
+
         </div>
       </section>
     </main>
