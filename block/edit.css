@@ -47,9 +47,6 @@
   font-weight: bolder;
 }
 
-.edit__window-enabled{
-  visibility: visible;
-}
 .edit__close{
   position: absolute;
   width: 5%;
