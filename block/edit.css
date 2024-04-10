@@ -4,10 +4,25 @@
   margin-left:20%;
   position: fixed;
   color: #000;
-  height: 50%;
+  height: 60%;
   width: 34%;
-  top: 20%;
+  top: 15%;
   visibility: hidden;
+}
+
+.edit__enabled{
+  visibility: visible;
+}
+
+.edit__overlay{
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #000;
+  z-index: 1;
+  opacity: .7;
 }
 
 .edit__window{
@@ -20,6 +35,12 @@
   width: 90%;
   margin-right: 5%;
   padding: 5%;
+  z-index: 1;
+  visibility: hidden;
+}
+
+.edit__window-enabled{
+  visibility: visible;
 }
 
 .edit__window-title{
@@ -32,7 +53,7 @@
 .edit__close{
   position: absolute;
   width: 5%;
-  height: 10%;
+  height: 7%;
   right: 0;
   z-index: 1;
   visibility: hidden;
@@ -55,17 +76,17 @@
   border: none;
   border-bottom: 1px solid black;
   width: 100%;
-  height: 60px;
+  height: 10%;
   box-sizing: border-box;
   margin-top: 8px;
   font-family: inherit;
   justify-items: center;
-  padding: 15px 0 15px 20px;
+  padding: 5% 0 5% 7%;
   border-radius: 4px;
   font-style: normal;
   font-weight: normal;
-  font-size: 20px;
-  line-height: 30px;
+  font-size: 1rem;
+  line-height: 1.5rem;
   color: #838383;
 }
 
@@ -80,8 +101,8 @@
   font-family: Inter;
   font-style: normal;
   font-weight: 500;
-  font-size: 16px;
-  line-height: 20px;
+  font-size: 1rem;
+  line-height: 1rem;
   margin-left: 5%;
 }
 
