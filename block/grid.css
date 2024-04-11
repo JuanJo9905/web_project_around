@@ -4,6 +4,9 @@
   align-items: center;
 }
 
+
+
+
 .content__grid{
   box-sizing: border-box;
   display: grid;
@@ -13,7 +16,6 @@
   width: 100%;
   padding-bottom: 5%;
 }
-
 
 .content__grid-card{
   position: relative;
@@ -61,16 +63,32 @@
   position: fixed;
   visibility: hidden;
 }
+
+.content__grid-poster-overlay{
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #000;
+  z-index: 1;
+  opacity: .7;
+}
+
 .content__grid-poster-enabled{
   visibility: visible;
 }
 .content__grid-poster-top{
+  position: relative;
   display: flex;
+  z-index: 1;
 }
 .content__grid-poster-close{
   position: absolute;
   top: 2%;
   right: 2%;
+  z-index: 1;
+
 }
 .content__grid-poster-image{
   overflow: hidden;
@@ -78,10 +96,16 @@
   margin-right: 10%;
 }
 
+.content__grid-poster-name{
+  position: relative;
+  z-index: 1;
+}
+
 .content__grid-poster-close:hover{
   opacity: 70%;
   cursor: pointer;
 }
+
 
 .content__grid-like{
   border: none;

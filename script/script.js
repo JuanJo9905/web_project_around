@@ -11,7 +11,6 @@ const closeModal = function (event){
   editButton.classList.remove('edit__close-enabled');
 
 
-  console.log('Clickeado!');
 };
 
 
@@ -55,7 +54,7 @@ function loadImage(img, name){
     posterImageElement.alt = name;
     posterNameElement.textContent = name;
     posterContainer.classList.add('content__grid-poster-enabled');
-    explorerContainer.addEventListener('click', closeModal);
+    posterContainer.querySelector('.content__grid-poster-overlay').addEventListener('click',closeModal);
   });
   cardsContainer.append(card);
 };
@@ -110,6 +109,7 @@ addButton.addEventListener('click',function(){
 popupButton.addEventListener('click', function(){
   popupWindow.classList.remove('popup__window-enabled');
   popupButton.classList.remove('popup__close-enabled');
+  popUpContainer.classList.remove('popup__enabled');
 });
 
 /**
@@ -122,6 +122,11 @@ const editForm = editWindow.querySelector('.edit__window');
 
 const explorerName = document.querySelector('.content__explorer-name').textContent;
 const explorerJob = document.querySelector('.content__explorer-job').textContent;
+
+editWindow.querySelector('.edit__window-form').classList.add('popup__form');
+editWindow.querySelector('#edit__window-form-name').classList.add('popup__input');
+editWindow.querySelector('#edit__window-form-title').classList.add('popup__input');
+editWindow.querySelector('.edit__window-form-button').classList.add('popup__button');
 
 
 edit.addEventListener('click', function(){
@@ -158,6 +163,7 @@ function addCard() {
   name.value = '';
   popupWindow.classList.remove('popup__window-enabled');
   popupButton.classList.remove('popup__close-enabled');
+  popUpContainer.classList.remove('popup__enabled');
 };
 
 function editExplorer(){
@@ -170,7 +176,8 @@ function editExplorer(){
   nameExplorer.textContent = name.value;
   jobExplorer.textContent = job.value;
 
-  editWindow.classList.remove('edit__window-enabled');
+  editForm.classList.remove('edit__window-enabled');
+  editWindow.classList.remove('edit__enabled');
   editButton.classList.remove('edit__close-enabled');
 }
 
@@ -261,3 +268,5 @@ enableValidation({
   inputErrorClass: 'popup__input_type_error',
   errorClass: 'popup__error_visible'
 });
+
+

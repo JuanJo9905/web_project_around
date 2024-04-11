@@ -115,6 +115,22 @@
   padding-left: 3%;
 }
 
+/*Validaciones formulario*/
+.popup__input:hover {
+  border-bottom-color: #000;
+}
+
+.popup__input:focus {
+  border-bottom-color: #007DFF;
+}
+.popup__input:invalid{
+  border-bottom: 1px solid red;
+}
+
+.popup__input:valid{
+  border-bottom: 1px solid green;
+}
+
 
 @media screen and (max-width: 500px) {
 

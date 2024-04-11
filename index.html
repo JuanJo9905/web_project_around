@@ -42,15 +42,17 @@
           </div>
         </template>
         <div class="content__grid">
-
         </div>
+
         <div class="content__grid-poster">
+          <div class="content__grid-poster-overlay"></div>
           <div class="content__grid-poster-top">
             <img src="./images/sunset.jpg" alt="image" class="content__grid-poster-image">
             <img src="./images/Close_Icon.png" class="content__grid-poster-close" alt="close">
           </div>
           <p class="content__grid-poster-name">leyenda</p>
         </div>
+
       </section>
       <section class="popup">
         <div class="popup__overlay"></div>
@@ -72,12 +74,12 @@
         <div class="edit__window">
           <h2 class="edit__window-title">Editar perfil</h2>
 
-          <form class="edit__window-form popup__form" novalidate>
-            <input type="text" id="edit__window-form-name" class="edit__window-form-input popup__input"  name="content__edit-form-title" placeholder="Nombre" required minlength="2">
+          <form class="edit__window-form" novalidate>
+            <input type="text" id="edit__window-form-name" class="edit__window-form-input"  name="content__edit-form-title" placeholder="Nombre" required minlength="2">
             <span class="edit__window-form-name-error edit__window-error"></span>
-            <input type="text" id="edit__window-form-title" class="edit__window-form-input popup__input"  name="edit__window-form-title" placeholder="Acerca de mi" required minlength="2">
+            <input type="text" id="edit__window-form-title" class="edit__window-form-input"  name="edit__window-form-title" placeholder="Acerca de mi" required minlength="2">
             <span class="edit__window-form-title-error edit__window-error"></span>
-            <button type="submit" class="edit__window-form-button popup__button">Guardar</button>
+            <button type="submit" class="edit__window-form-button">Guardar</button>
           </form>
 
         </div>

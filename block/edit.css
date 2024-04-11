@@ -128,15 +128,6 @@
   border-bottom: 1px solid green;
 }
 
-.popup__checkbox:checked + .popup__checkbox-item{
-  background: #007DFF;
-}
-
-.popup__checkbox:checked + .popup__checkbox-item::before{
-  background: url(https://practicum-content.s3.us-west-1.amazonaws.com/web-code/moved_checkbox.svg) center no-repeat;
-}
-
-
 .button_inactive{
   opacity: 70%;
 }
