@@ -1,3 +1,5 @@
+import Card from "./card.js";
+
 const explorerContainer = document.querySelector('.content__explorer');
 const closeModal = function (event){
   posterContainer.classList.remove('content__grid-poster-enabled');
@@ -32,6 +34,7 @@ posterButton.addEventListener('click', function(){
 function loadImage(img, name){
   const cardTemplate = document.querySelector('#content__grid').content;
   const card = cardTemplate.querySelector('.content__grid-card').cloneNode(true);
+
 
   card.querySelector('.content__grid-image').src = img;
   card.querySelector('.content__grid-image').alt = name;
@@ -86,8 +89,12 @@ const initialImages = [
   }
 ];
 
-initialImages.forEach(element => {
-  loadImage(element['link'], element['name']);
+const contenedor_imagenes = document.querySelector('.content__grid');
+document.addEventListener('DOMContentLoaded', () => {
+  initialImages.forEach(element => {
+    const card = new Card(element['name'], element['link'], '../images/Trash.svg' ,'#content__grid');
+    contenedor_imagenes.appendChild(card.obtenerElementoCard());
+  });
 });
 
 /**
@@ -159,7 +166,8 @@ const saveEdit = editWindow.querySelector('.edit__window-form-button');
 function addCard() {
   let image = popUpContainer.querySelector('#popup__window-form-link');
   let name =  popUpContainer.querySelector('#popup__window-form-title');
-  loadImage(image.value, name.value);
+  const card = new Card(name.value, image.value, '../images/Trash.svg','#content__grid');
+  contenedor_imagenes.appendChild(card.obtenerElementoCard());
   image.value = '';
   name.value = '';
   popupWindow.classList.remove('popup__window-enabled');
