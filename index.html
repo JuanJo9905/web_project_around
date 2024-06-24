@@ -1,96 +1,154 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="author" content="Juan José González" />
-  <meta name="description" content="Crud de imagenes" />
-  <meta name="keywords" content="fotografia, CRUD, javscript" />
-  <link rel="stylesheet" href="./pages/index.css">
-  <title>Project Around</title>
-</head>
-<body>
-  <div class="page">
-    <header class="header">
-      <div class="header__title">
-        <img src="./images/Vector.svg" alt="title">
-      </div>
-    </header>
-    <main class="content">
-      <section class="explorer">
-        <div class="content__explorer">
-          <img src="./images/Avatar.png" class="content__explorer-image-image" alt="avatar">
-          <div class="content__explorer-info">
-            <div class="content__explorer-info-top">
-              <h2 class="content__explorer-name">Jacques Costeau</h2>
-              <button class="content__explorer-edit-enable"></button>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="author" content="Juan José González" />
+    <meta name="description" content="Crud de imagenes" />
+    <meta name="keywords" content="fotografia, CRUD, javscript" />
+    <link rel="stylesheet" href="./pages/index.css" />
+    <title>Project Around</title>
+  </head>
+  <body>
+    <div class="page">
+      <header class="header">
+        <div class="header__title">
+          <img src="./images/Vector.svg" alt="title" />
+        </div>
+      </header>
+      <main class="content">
+        <section class="explorer">
+          <div class="content__explorer">
+            <img
+              src="./images/Avatar.png"
+              class="content__explorer-image-image"
+              alt="avatar"
+            />
+            <div class="content__explorer-info">
+              <div class="content__explorer-info-top">
+                <h2 class="content__explorer-name">Jacques Costeau</h2>
+                <button class="content__explorer-edit-enable"></button>
+              </div>
+              <h3 class="content__explorer-job">Explorador</h3>
             </div>
-            <h3 class="content__explorer-job">Explorador</h3>
+            <button class="content__explorer-add-enable">+</button>
           </div>
-          <button class="content__explorer-add-enable">+</button>
-        </div>
-      </section>
-      <section class="grid">
-        <template id="content__grid">
-          <div class="content__grid-card">
-            <img src="./images/sunset.jpg" alt="card-image" class="content__grid-image">
-            <img src="./images/Trash.svg" alt="delete" class="content__grid-image-delete">
-            <div class="content__grid-card-description">
-              <p class="content__grid-card-name"></p>
-              <button class="content__grid-like"></button>
+        </section>
+        <section class="grid">
+          <template id="content__grid">
+            <div class="content__grid-card">
+              <img
+                src="./images/sunset.jpg"
+                alt="card-image"
+                class="content__grid-image"
+              />
+              <img
+                src="./images/Trash.svg"
+                alt="delete"
+                class="content__grid-image-delete"
+              />
+              <div class="content__grid-card-description">
+                <p class="content__grid-card-name"></p>
+                <button class="content__grid-like"></button>
+              </div>
             </div>
+          </template>
+          <div class="content__grid"></div>
+
+          <div class="content__grid-poster">
+            <div class="content__grid-poster-overlay"></div>
+            <div class="content__grid-poster-top">
+              <img
+                src="./images/sunset.jpg"
+                alt="image"
+                class="content__grid-poster-image"
+              />
+              <img
+                src="./images/Close_Icon.png"
+                class="content__grid-poster-close"
+                alt="close"
+              />
+            </div>
+            <p class="content__grid-poster-name">leyenda</p>
           </div>
-        </template>
-        <div class="content__grid">
-        </div>
-
-        <div class="content__grid-poster">
-          <div class="content__grid-poster-overlay"></div>
-          <div class="content__grid-poster-top">
-            <img src="./images/sunset.jpg" alt="image" class="content__grid-poster-image">
-            <img src="./images/Close_Icon.png" class="content__grid-poster-close" alt="close">
+        </section>
+        <section class="popup">
+          <div class="popup__overlay"></div>
+          <img src="./images/Close_Icon.png" class="popup__close" alt="close" />
+          <div class="popup__window">
+            <h2 class="popup__window-title">Nuevo lugar</h2>
+            <form action="submit" class="popup__window-form popup__form">
+              <input
+                type="text"
+                id="popup__window-form-title"
+                class="popup__window-form-input popup__input"
+                name="popup__window-form-title"
+                placeholder="Titulo"
+                required
+              />
+              <span
+                class="popup__window-form-title-error popup__window-error"
+              ></span>
+              <input
+                type="url"
+                id="popup__window-form-link"
+                class="popup__window-form-input popup__input"
+                name="popup__window-form-link"
+                placeholder="Enlace a la imagen"
+                required
+              />
+              <span
+                class="popup__window-form-link-error popup__window-error"
+              ></span>
+              <button
+                type="submit"
+                class="popup__window-form-button popup__button"
+              >
+                Crear
+              </button>
+            </form>
           </div>
-          <p class="content__grid-poster-name">leyenda</p>
-        </div>
+        </section>
+        <section class="edit">
+          <div class="edit__overlay"></div>
+          <img src="./images/Close_Icon.png" class="edit__close" alt="close" />
+          <div class="edit__window">
+            <h2 class="edit__window-title">Editar perfil</h2>
 
-      </section>
-      <section class="popup">
-        <div class="popup__overlay"></div>
-        <img src="./images/Close_Icon.png" class="popup__close" alt="close">
-        <div class="popup__window">
-          <h2 class="popup__window-title">Nuevo lugar</h2>
-          <form action="submit" class="popup__window-form popup__form">
-            <input type="text" id="popup__window-form-title" class="popup__window-form-input popup__input"  name="popup__window-form-title" placeholder="Titulo" required>
-            <span class="popup__window-form-title-error popup__window-error"></span>
-            <input type="url" id="popup__window-form-link"  class="popup__window-form-input popup__input"  name="popup__window-form-link" placeholder="Enlace a la imagen" required>
-            <span class="popup__window-form-link-error popup__window-error"></span>
-            <button type="submit" class="popup__window-form-button popup__button">Crear</button>
-          </form>
-        </div>
-      </section>
-      <section class="edit">
-        <div class="edit__overlay"></div>
-        <img src="./images/Close_Icon.png" class="edit__close" alt="close">
-        <div class="edit__window">
-          <h2 class="edit__window-title">Editar perfil</h2>
-
-          <form class="edit__window-form" novalidate>
-            <input type="text" id="edit__window-form-name" class="edit__window-form-input"  name="content__edit-form-title" placeholder="Nombre" required minlength="2">
-            <span class="edit__window-form-name-error edit__window-error"></span>
-            <input type="text" id="edit__window-form-title" class="edit__window-form-input"  name="edit__window-form-title" placeholder="Acerca de mi" required minlength="2">
-            <span class="edit__window-form-title-error edit__window-error"></span>
-            <button type="submit" class="edit__window-form-button">Guardar</button>
-          </form>
-
-        </div>
-      </section>
-    </main>
-    <footer class="footer"></footer>
-  </div>
-  <script type="module" src="./script/script.js"></script>
-  <script type="module" src="./script/Card.js"></script>
-  <script type="module" src="./script/FormValidator.js"></script>
-  <script type="module" src="./script/validate.js"></script>
-
-</body>
+            <form class="edit__window-form" novalidate>
+              <input
+                type="text"
+                id="edit__window-form-name"
+                class="edit__window-form-input"
+                name="content__edit-form-title"
+                placeholder="Nombre"
+                required
+                minlength="2"
+              />
+              <span
+                class="edit__window-form-name-error edit__window-error"
+              ></span>
+              <input
+                type="text"
+                id="edit__window-form-title"
+                class="edit__window-form-input"
+                name="edit__window-form-title"
+                placeholder="Acerca de mi"
+                required
+                minlength="2"
+              />
+              <span
+                class="edit__window-form-title-error edit__window-error"
+              ></span>
+              <button type="submit" class="edit__window-form-button">
+                Guardar
+              </button>
+            </form>
+          </div>
+        </section>
+      </main>
+      <footer class="footer"></footer>
+    </div>
+    <script type="module" src="./script/script.js"></script>
+  </body>
 </html>
