@@ -1,133 +1,124 @@
-.edit{
+.edit {
   display: flex;
   justify-content: center;
-  margin-left:20%;
-  position: fixed;
-  color: #000;
-  height: 60%;
-  width: 34%;
-  top: 15%;
-  visibility: hidden;
-}
-
-.edit__enabled{
-  visibility: visible;
-}
-
-.edit__overlay{
-  height: 100vh;
-  width: 100%;
+  align-items: center;
   position: fixed;
   top: 0;
   left: 0;
-  background-color: #000;
-  z-index: 1;
-  opacity: .7;
-}
-
-.edit__window{
-  background-color: #fff;
-  display: flex;
-  flex-direction: column;
-  border-radius: 10px;
-  margin-top: 6%;
-  height: 100%;
-  width: 90%;
-  margin-right: 5%;
-  padding: 5%;
-  z-index: 1;
-  visibility: hidden;
-}
-
-.edit__window-enabled{
-  visibility: visible;
-}
-
-.edit__window-title{
-  font-weight: bolder;
-}
-
-.edit__close{
-  position: absolute;
-  width: 5%;
-  height: 7%;
-  right: 0;
-  z-index: 1;
-  visibility: hidden;
-}
-
-.edit__close-enabled{
-  visibility: visible;
-}
-
-.edit__close:hover{
-  opacity: 70%;
-  cursor: pointer;
-}
-
-.edit__window-form{
-  display: flex;
-  flex-direction: column;
-}
-.edit__window-form-input{
-  border: none;
-  border-bottom: 1px solid black;
   width: 100%;
-  height: 10%;
-  box-sizing: border-box;
-  margin-top: 8px;
-  font-family: inherit;
-  justify-items: center;
-  padding: 5% 0 5% 7%;
-  border-radius: 4px;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 1rem;
-  line-height: 1.5rem;
-  color: #838383;
+  height: 100%;
+  visibility: hidden;
+  z-index: 2;
+  color: #000;
 }
 
-.edit__window-form-button{
-  margin-top: 32px;
-  max-width: 385px;
-  height: 60px;
-  color: white;
-  background-color: #000;
-  border-radius: 4px;
-  opacity: 1;
-  font-family: Inter;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 1rem;
-  line-height: 1rem;
-  margin-left: 5%;
+.edit__enabled {
+  visibility: visible;
 }
 
-.edit__window-form-button:hover{
-  opacity: 70%;
+.edit__overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  z-index: 1;
+}
+
+.edit__window {
+  background-color: #fff;
+  border-radius: 10px;
+  padding: 20px;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80%;
+  overflow-y: auto;
+  z-index: 2;
+}
+
+.edit__window-title {
+  color: black;
+  font-weight: bold;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+}
+
+.edit__close {
+  position: relative;
+  width: 30px;
+  height: 30px;
   cursor: pointer;
+  z-index: 3;
+  align-self: center;
+  bottom: 150px;
+  background-color: black;
+
 }
 
-.edit__window-error{
+.edit__close-enabled {
+  visibility: visible;
+}
+
+.edit__close:hover {
+  opacity: 0.7;
+}
+
+.edit__window-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit__window-form-input {
+  margin-bottom: 15px;
+  padding: 10px;
+  border: none;
+  border-bottom: 1px solid #ccc;
+  font-size: 1rem;
+}
+
+.edit__window-form-button {
+  background-color: #010810;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.edit__window-form-button:hover {
+  opacity: 0.7;
+}
+
+.edit__window-error {
   color: red;
 }
 
-/*Validaciones formulario*/
-.popup__input:hover {
-  border-bottom-color: #000;
-}
-
-.popup__input:focus {
+.edit__window-form-input:focus {
+  outline: none;
   border-bottom-color: #007DFF;
 }
-.popup__input:invalid{
+
+.edit__window-form-input:invalid {
   border-bottom: 1px solid red;
 }
 
-.popup__input:valid{
+.edit__window-form-input:valid {
   border-bottom: 1px solid green;
 }
 
-.button_inactive{
-  opacity: 70%;
+.button_inactive {
+  opacity: 0.7;
+}
+
+
+@media screen and (max-width: 500px) {
+  .edit__window-title {
+    font-size: 1.2rem;
+  }
+  .edit__window-form-input {
+    font-size: 0.8rem;
+  }
 }

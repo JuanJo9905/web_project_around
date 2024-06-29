@@ -1,52 +1,51 @@
-.grid{
+.grid {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-
-
-
-.content__grid{
+.content__grid {
   box-sizing: border-box;
   display: grid;
-  grid-template-columns: 32% 32% 32%;
-  grid-template-rows: 361px 361px 361px 361px 361px 361px;
+  grid-template-columns: 1fr 1fr 1fr;
   gap: 2%;
   width: 100%;
+  max-width: 880px;
   padding-bottom: 5%;
 }
 
-.content__grid-card{
+.content__grid-card {
   position: relative;
-  height: 100%;
-  border-radius: 10px 10px 0 0;
+  height: 360px;
+  width: 292px;
+  background-color: #fff;
+  border-radius: 10px;
 }
-.content__grid-image{
+.content__grid-image {
   width: 100%;
   height: 80%;
-
+  border-radius: 10px 10px 0 0;
 }
 
-.content__grid-image-delete{
+.content__grid-image-delete {
   position: absolute;
   right: 5%;
   top: 5%;
 }
 
-.content__grid-image-delete:hover{
+.content__grid-image-delete:hover {
   opacity: 70%;
   cursor: pointer;
 }
 
-.content__grid-card-name{
+.content__grid-card-name {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
   width: 70%;
 }
 
-.content__grid-card-description{
+.content__grid-card-description {
   display: flex;
   justify-content: space-between;
   color: black;
@@ -54,17 +53,18 @@
   padding: 0 5%;
   font-size: 24px;
   font-weight: bolder;
+  border-radius: 0 0 10px 10px;
 }
 
 /*POSTER*/
-.content__grid-poster{
+.content__grid-poster {
   top: 13vh;
   width: 34%;
   position: fixed;
   visibility: hidden;
 }
 
-.content__grid-poster-overlay{
+.content__grid-poster-overlay {
   height: 100vh;
   width: 100%;
   position: fixed;
@@ -72,44 +72,43 @@
   left: 0;
   background-color: #000;
   z-index: 1;
-  opacity: .7;
+  opacity: 0.7;
 }
 
-.content__grid-poster-enabled{
+.content__grid-poster-enabled {
   visibility: visible;
 }
-.content__grid-poster-top{
+.content__grid-poster-top {
   position: relative;
   display: flex;
   z-index: 1;
 }
-.content__grid-poster-close{
+.content__grid-poster-close {
   position: absolute;
   top: 2%;
   right: 2%;
   z-index: 1;
-
 }
-.content__grid-poster-image{
+.content__grid-poster-image {
   overflow: hidden;
   margin-top: 10%;
   margin-right: 10%;
 }
 
-.content__grid-poster-name{
+.content__grid-poster-name {
   position: relative;
   z-index: 1;
 }
 
-.content__grid-poster-close:hover{
+.content__grid-poster-close:hover {
   opacity: 70%;
   cursor: pointer;
 }
 
-
-.content__grid-like{
+.content__grid-like {
   border: none;
-  background: url(https://practicum-content.s3.us-west-1.amazonaws.com/web-code/dom/moved_heart.svg) center no-repeat;
+  background: url(https://practicum-content.s3.us-west-1.amazonaws.com/web-code/dom/moved_heart.svg)
+    center no-repeat;
   background-size: 100%;
   cursor: pointer;
   height: 15%;
@@ -120,27 +119,26 @@
   transition: 0.3s;
 }
 
-.content__grid-like:hover{
+.content__grid-like:hover {
   transform: scale(1.3);
 }
 
-.content__grid-like-active{
+.content__grid-like-active {
   opacity: 1;
-  background: url(https://practicum-content.s3.us-west-1.amazonaws.com/web-code/dom/moved_heart-filled.svg) center no-repeat;
+  background: url(https://practicum-content.s3.us-west-1.amazonaws.com/web-code/dom/moved_heart-filled.svg)
+    center no-repeat;
 }
 
 @media screen and (max-width: 500px) {
-
-  .content__grid{
+  .content__grid {
     display: flex;
     flex-direction: column;
   }
 
-  .content__grid-poster{
+  .content__grid-poster {
     top: 13%;
     width: 80%;
     height: 80%;
     position: fixed;
   }
-
 }
