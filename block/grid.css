@@ -9,9 +9,9 @@
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 2%;
-  width: 100%;
   max-width: 880px;
   padding-bottom: 5%;
+  width: 100%;
 }
 
 .content__grid-card {
@@ -129,12 +129,28 @@
     center no-repeat;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 900px) {
   .content__grid {
-    display: flex;
-    flex-direction: column;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2%;
+    max-width: 880px;
+    padding-bottom: 5%;
+    width: 100%;
   }
 
+}
+
+@media screen and (max-width: 500px) {
+  .content__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .content__grid-card{
+    margin-left: 10%;
+  }
+  
   .content__grid-poster {
     top: 13%;
     width: 80%;
