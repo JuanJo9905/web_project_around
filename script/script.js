@@ -1,5 +1,6 @@
 import Card from "./Card.js";
 import FormValidator from "./FormValidator.js";
+import Popup from "./Popup.js";
 
 /**
  * Manejo de validaciones
@@ -142,7 +143,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 /**
  * Abre y cierra el pop up
- */
+ * 
 const addButton = document.querySelector(".content__explorer-add-enable");
 const popUpContainer = document.querySelector(".popup");
 const popupWindow = popUpContainer.querySelector(".popup__window");
@@ -163,6 +164,25 @@ popupButton.addEventListener("click", function () {
   popupButton.classList.remove("popup__close-enabled");
   popUpContainer.classList.remove("popup__enabled");
 });
+*/
+/**
+ * Uso del objeto popup
+*/ 
+const popUpContainer = document.querySelector(".popup");
+
+const addButton = document.querySelector(".content__explorer-add-enable");
+const popup = new Popup('.popup');
+addButton.addEventListener("click", function () {
+  popup.open();
+  console.log('abrir objeto');
+  
+  popUpContainer
+  .querySelector(".popup__overlay")
+  .addEventListener("click", closeModal);
+  saveCard.disabled = true;
+});
+
+
 
 /**
  * Abre y cierra la edicion del perfil
