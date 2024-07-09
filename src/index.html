@@ -6,7 +6,6 @@
     <meta name="author" content="Juan José González" />
     <meta name="description" content="Crud de imagenes" />
     <meta name="keywords" content="fotografia, CRUD, javscript" />
-    <link rel="stylesheet" href="./pages/index.css" />
     <title>Project Around</title>
   </head>
   <body>
@@ -71,6 +70,7 @@
             </div>
             <p class="content__grid-poster-name">leyenda</p>
           </div>
+          
         </section>
         <section class="popup">
           <div class="popup__overlay"></div>
@@ -101,54 +101,56 @@
               ></span>
               <button
                 type="submit"
-                class="popup__window-form-button popup__button"
-              >
+                class="popup__window-form-button popup__button">
                 Crear
               </button>
             </form>
           </div>
           <img src="./images/Close_Icon.png" class="popup__close" alt="close" />
         </section>
-        <section class="edit">
-          <div class="edit__overlay"></div>
-          <div class="edit__window">
-            <h2 class="edit__window-title">Editar perfil</h2>
-
-            <form class="edit__window-form" novalidate>
+        <section class="popup" id="edit">
+          <div class="popup__overlay" id="edit__overlay"></div>
+          <div class="popup__window" id="edit__window">
+            <h2 class="popup__window-title" id="edit__window-title">Editar perfil</h2>
+            <form class="popup__window-form popup__form" id="edit__window-form" novalidate>
               <input
                 type="text"
                 id="edit__window-form-name"
-                class="edit__window-form-input"
+                class="popup__window-form-input popup__input"
                 name="content__edit-form-title"
                 placeholder="Nombre"
                 required
                 minlength="2"
               />
               <span
-                class="edit__window-form-name-error edit__window-error"
+                id="edit__window-form-name-error edit__window-error" 
+                class="edit__window-form-name-error popup__window-error"
               ></span>
               <input
                 type="text"
                 id="edit__window-form-title"
-                class="edit__window-form-input"
+                class="popup__window-form-input popup__input"
                 name="edit__window-form-title"
                 placeholder="Acerca de mi"
                 required
                 minlength="2"
               />
               <span
-                class="edit__window-form-title-error edit__window-error"
+                id="edit__window-form-title-error edit__window-error"
+                class="edit__window-form-title-error popup__window-error"
               ></span>
-              <button type="submit" class="edit__window-form-button">
+              <button 
+                type="submit" 
+                id="edit__window-form-button"
+                class="popup__window-form-button popup__button">
                 Guardar
               </button>
             </form>
           </div>
-          <img src="./images/Close_Icon.png" class="edit__close" alt="close" />
+          <img src="./images/Close_Icon.png" class="popup__close" id="edit__close" alt="close" />
         </section>
       </main>
       <footer class="footer"></footer>
     </div>
-    <script type="module" src="./script/script.js"></script>
   </body>
 </html>

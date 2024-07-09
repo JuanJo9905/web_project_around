@@ -2,29 +2,31 @@ class Popup {
   constructor(popupSelector) {
     this._popup = document.querySelector(popupSelector);
     this._handleEscClose = this._handleEscClose.bind(this);
+    this._closeModal = this._closeModal.bind(this);
     this.setEventListeners();
+
+    this._popupSaveButton = this._popup.querySelector(".popup__window-form-button");
+    this._popupCloseButton = this._popup.querySelector(".popup__close");
   }
 
   // Método público para abrir el popup
   open() {
-    this._popup.classList.add('popup_enabled');
+    this._popup.classList.add('popup__enabled');
+    this._popup.querySelector(".popup__overlay").addEventListener("click", this._closeModal);
+    this._popupSaveButton.disabled = true;
     document.addEventListener('keydown', this._handleEscClose);
-
-    const popupWindow = this._popup.querySelector(".popup__window");
-    const popupButton = this._popup.querySelector(".popup__close");
-    popupWindow.classList.add("popup__window-enabled");
-    popupButton.classList.add("popup__close-enabled");
   }
 
   // Método público para cerrar el popup
   close() {
-    this._popup.classList.remove('popup_enabled');
+    this._popup.classList.remove('popup__enabled');
+    this._popup.querySelector(".popup__overlay").removeEventListener("click", this._closeModal);
     document.removeEventListener('keydown', this._handleEscClose);
+  }
 
-    const popupWindow = this._popup.querySelector(".popup__window");
-    const popupButton = this._popup.querySelector(".popup__close");
-    popupWindow.classList.remove("popup__window-enabled");
-    popupButton.classList.remove("popup__close-enabled");
+  // Método privado para cerrar el popup al hacer clic en el overlay
+  _closeModal() {
+    this.close();
   }
 
   // Método privado para manejar el cierre del popup al pulsar la tecla Esc
