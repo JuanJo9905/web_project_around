@@ -12,14 +12,14 @@
     <div class="page">
       <header class="header">
         <div class="header__title">
-          <img src="./images/Vector.svg" alt="title" />
+          <img src="<%=require('./images/Vector.svg')%>" alt="title" />
         </div>
       </header>
       <main class="content">
         <section class="explorer">
           <div class="content__explorer">
             <img
-              src="./images/Avatar.png"
+              src="<%=require('./images/Avatar.png')%>"
               class="content__explorer-image-image"
               alt="avatar"
             />
@@ -37,15 +37,13 @@
           <template id="content__grid">
             <div class="content__grid-card">
               <img
-                src="./images/sunset.jpg"
+                src="./images/sunset.jpg" 
                 alt="card-image"
                 class="content__grid-image"
               />
-              <img
-                src="./images/Trash.svg"
-                alt="delete"
-                class="content__grid-image-delete"
-              />
+              <div
+                class="content__grid-image-delete">
+              </div>
               <div class="content__grid-card-description">
                 <p class="content__grid-card-name"></p>
                 <button class="content__grid-like"></button>
@@ -63,7 +61,7 @@
                 class="content__grid-poster-image"
               />
               <img
-                src="./images/Close_Icon.png"
+                src="<%=require('./images/Close_Icon.png')%>"
                 class="content__grid-poster-close"
                 alt="close"
               />
@@ -86,7 +84,8 @@
                 required
               />
               <span
-                class="popup__window-form-title-error popup__window-error"
+                id="popup__window-form-title-error"
+                class="popup__window-error"
               ></span>
               <input
                 type="url"
@@ -97,7 +96,8 @@
                 required
               />
               <span
-                class="popup__window-form-link-error popup__window-error"
+                id="popup__window-form-link-error"
+                class="popup__window-error"
               ></span>
               <button
                 type="submit"
@@ -106,7 +106,7 @@
               </button>
             </form>
           </div>
-          <img src="./images/Close_Icon.png" class="popup__close" alt="close" />
+          <img src="<%=require('./images/Close_Icon.png')%>" class="popup__close" alt="close" />
         </section>
         <section class="popup" id="edit">
           <div class="popup__overlay" id="edit__overlay"></div>
@@ -123,7 +123,8 @@
                 minlength="2"
               />
               <span
-                class="edit__window-form-name popup__window-error"
+                id="edit__window-form-name-error" 
+                class="popup__window-error"
               ></span>
               <input
                 type="text"
@@ -135,7 +136,8 @@
                 minlength="2"
               />
               <span
-                class="edit__window-form-title popup__window-error"
+                id="edit__window-form-title-error"
+                class="popup__window-error"
               ></span>
               <button 
                 type="submit" 
@@ -145,7 +147,7 @@
               </button>
             </form>
           </div>
-          <img src="./images/Close_Icon.png" class="popup__close" id="edit__close" alt="close" />
+          <img src="<%=require('./images/Close_Icon.png')%>" class="popup__close" id="edit__close" alt="close" />
         </section>
       </main>
       <footer class="footer"></footer>

@@ -2,6 +2,7 @@ import Card from "./script/Card.js";
 import FormValidator from "./script/FormValidator.js";
 import PopupWithForm from "./script/PopupWithForm.js";
 import UserInfo from "./script/UserInfo.js";
+import "./styles/index.css";
 
 /**
  * Manejo de validaciones
