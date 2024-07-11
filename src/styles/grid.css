@@ -150,10 +150,7 @@
 @media screen and (max-width: 500px) {
   .content__grid {
     grid-template-columns: 1fr;
-  }
-
-  .content__grid-card{
-    margin-left: 10%;
+    justify-items: center;
   }
   
   .content__grid-poster {
@@ -176,4 +173,5 @@
     width: 20px;
     height: 20px;
   }
+
 }
