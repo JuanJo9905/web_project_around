@@ -149,6 +149,21 @@
           </div>
           <img src="<%=require('./images/Close_Icon.png')%>" class="popup__close" id="edit__close" alt="close" />
         </section>
+        <section class="popup" id="confirm">
+          <div class="popup__overlay" id="confirm__overlay"></div>
+          <div class="popup__window" id="confirm__window">
+            <h2 class="popup__window-title" id="confirm__window-title">¿Estás seguro?</h2>
+            <form class="popup__window-form popup__form" id="confirm__window-form" novalidate>
+              <button 
+                type="submit" 
+                id="confirm__window-form-button"
+                class="popup__window-form-button popup__button">
+                Si
+              </button>
+            </form>
+          </div>
+          <img src="<%=require('./images/Close_Icon.png')%>" class="popup__close popup__close-small" id="confirm__close" alt="close" />
+        </section>
       </main>
       <footer>
         <div class="footer">

@@ -48,6 +48,10 @@
   bottom: 150px;
 }
 
+.popup__close-small{
+  bottom: 100px;
+};
+
 .popup__window-title {
   font-weight: bolder;
   margin-bottom: 20px;
@@ -131,6 +135,9 @@
   .popup__close{
     bottom: 140px;
   }
+  .popup__close-small{
+    bottom: 90px;
+  };
 }
 
 @media screen and (max-width: 500px) {
@@ -152,4 +159,7 @@
   .popup__close{
     bottom: 130px;
   }
+  .popup__close-small{
+    bottom: 80px;
+  };
 }

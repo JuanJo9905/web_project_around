@@ -4,6 +4,9 @@ import PopupWithForm from "./script/PopupWithForm.js";
 import UserInfo from "./script/UserInfo.js";
 import "./styles/index.css";
 
+const groupId = "web_es_11";
+const token = "2b046d27-e300-4552-a820-76fed2ad182a";
+
 /**
  * Manejo de validaciones
  */
@@ -27,102 +30,54 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
-const explorerContainer = document.querySelector(".content__explorer");
-const closeModal = function (event) {
-  posterContainer.classList.remove("content__grid-poster-enabled");
-};
 
-const cardsContainer = document.querySelector(".content__grid");
-
-/*
- * Carga las imagenes iniciales haciendo uso del template
+/**
+ * Obtener las imagenes iniciales del servidor
  */
-function loadImage(img, name) {
-  const cardTemplate = document.querySelector("#content__grid").content;
-  const card = cardTemplate
-    .querySelector(".content__grid-card")
-    .cloneNode(true);
-
-  card.querySelector(".content__grid-image").src = img;
-  card.querySelector(".content__grid-image").alt = name;
-  card.querySelector(".content__grid-image-delete").src = "./images/Trash.svg";
-  card.querySelector(".content__grid-card-name").textContent = name;
-  card
-    .querySelector(".content__grid-like")
-    .addEventListener("click", function (evt) {
-      evt.target.classList.toggle("content__grid-like-active");
-    });
-  card
-    .querySelector(".content__grid-image-delete")
-    .addEventListener("click", function (evt) {
-      const elemento = evt.currentTarget.parentNode;
-      elemento.remove();
-    });
-
-  card
-    .querySelector(".content__grid-image")
-    .addEventListener("click", function (evt) {
-      const image = evt.target.getAttribute("src");
-      const name = evt.target.parentElement.querySelector(
-        ".content__grid-card-name"
-      ).textContent;
-      const posterImageElement = gridContainer.querySelector(
-        ".content__grid-poster-image"
-      );
-      const posterNameElement = gridContainer.querySelector(
-        ".content__grid-poster-name"
-      );
-      posterImageElement.src = img;
-      posterImageElement.alt = name;
-      posterNameElement.textContent = name;
-      posterContainer.classList.add("content__grid-poster-enabled");
-      posterContainer
-        .querySelector(".content__grid-poster-overlay")
-        .addEventListener("click", closeModal);
-    });
-  cardsContainer.append(card);
-}
-
-const initialImages = [
-  {
-    name: "Valle de Yosemite",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/yosemite.jpg",
-  },
-  {
-    name: "Lago Louise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lake-louise.jpg",
-  },
-  {
-    name: "Montañas Calvas",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/bald-mountains.jpg",
-  },
-  {
-    name: "Latemar",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/latemar.jpg",
-  },
-  {
-    name: "Parque Nacional de la Vanoise",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/vanoise.jpg",
-  },
-  {
-    name: "Lago di Braies",
-    link: "https://practicum-content.s3.us-west-1.amazonaws.com/new-markets/WEB_sprint_5/ES/lago.jpg",
-  },
-];
-
 const contenedor_imagenes = document.querySelector(".content__grid");
-document.addEventListener("DOMContentLoaded", () => {
-  initialImages.forEach((element) => {
-    const card = new Card(
-      element["name"],
-      element["link"],
-      "./images/Trash.svg",
-      "#content__grid",
-      handleCardClick
-    );
-    contenedor_imagenes.appendChild(card.obtenerElementoCard());
-  });
-});
+let likes = [];
+async function getImages(){
+  let images = await fetch(`https://around.nomoreparties.co/v1/${groupId}/cards`,{
+    headers:{
+      'Authorization':token
+    }
+  })
+  .then((res) => {
+    if(res.ok){
+      return res.json();
+    }
+    return Promise.reject(res.status);
+  })
+  .then((data)=>{
+    console.log('Imagenes Cargadas: ',data);
+    data.forEach((image)=>{
+      const card = new Card(
+        image.name,
+        image.link,
+        image._id,
+        "./images/Trash.svg",
+        "#content__grid",
+        handleCardClick
+      );
+      contenedor_imagenes.appendChild(card.obtenerElementoCard());
+      likes.push({[image.name]:image.likes.length});
+      if (image.owner._id != '9c29dd25ee3a3c6151ca4cf7'){
+        card.eliminarIconoEliminar();
+      }
+    });
+  })
+  .catch((err)=>{
+    console.log(err);
+  })  
+  .finally(() =>{
+    console.log('Petición images terminada');
+    showLikes(likes);
+
+  })
+  ;
+
+};
+getImages();
 
 /**
  * Muestra el poster al darle click
@@ -149,7 +104,6 @@ function handleCardClick(link, name) {
  * Uso del objeto popup
 */ 
 const popUpContainer = document.querySelector(".popup");
-
 const addButton = document.querySelector(".content__explorer-add-enable");
 const popupWithForm = new PopupWithForm('.popup', addCard);
 addButton.addEventListener("click", function () {
@@ -180,24 +134,54 @@ editButton.addEventListener("click", function () {
 
 /**
  * Añadir una nueva carta
- */
+*/
 const saveCard = popUpContainer.querySelector(".popup__window-form-button");
 const saveEdit = editWindow.querySelector("#edit__window-form-button");
-
 function addCard() {
   let image = popUpContainer.querySelector("#popup__window-form-link");
   let name = popUpContainer.querySelector("#popup__window-form-title");
+
+  let imageEnvio = image.value;
+  let nameEnvio = name.value;
+  //Envío del formulario al servidor
+  fetch(`https://around.nomoreparties.co/v1/${groupId}/cards`, {
+      method: "POST",
+      headers: {
+        authorization: token,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        name: nameEnvio,
+        link: imageEnvio
+      })
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(res.status);
+    })
+    .catch((err) =>{
+      console.log('Error en la solicitud: ',err);
+    })
+    .finally(() =>{
+      console.log('Carta enviada');
+    });
+
+
   const card = new Card(
-    name.value,
-    image.value,
-    "./images/Trash.svg",
-    "#content__grid",
-    handleCardClick
-  );
+      name.value,
+      image.value,
+      "./images/Trash.svg",
+      "#content__grid",
+      handleCardClick
+    );
+  
   contenedor_imagenes.appendChild(card.obtenerElementoCard());
-  image.value = "";
-  name.value = "";
-  popUpContainer.classList.remove("popup__enabled");
+    image.value = "";
+    name.value = "";
+    popUpContainer.classList.remove("popup__enabled");
+
   }
 
 function editExplorer() {
@@ -210,7 +194,84 @@ function editExplorer() {
   nameExplorer.textContent = name.value;
   jobExplorer.textContent = job.value;
   editWindow.classList.remove("popup__enabled");
+
+  //Envio de la info al servidor
+  fetch(`https://around.nomoreparties.co/v1/${groupId}/users/me`, {
+    method: "PATCH",
+    headers: {
+      authorization: token,
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      name: name.value,
+      about: job.value
+    })
+  })  
+  .then((res) => {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(res.status);
+  })
+  .catch((err) =>{
+    console.log('Error en la solicitud: ',err);
+  })
+  .finally(() =>{
+    console.log('Edicion terminada');
+  });
   }
 
 saveCard.addEventListener("click", addCard);
 saveEdit.addEventListener("click", editExplorer);
+
+
+/** 
+ * Obtener la información del servidor
+*/
+function searchUser(groupId,token){
+  fetch(`https://around.nomoreparties.co/v1/${groupId}/users/me`,{
+    headers:{
+      'Authorization': token
+    }
+  })
+  .then((res) => {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(res.status);
+  })
+  .then((data) => {
+    let nameExplorer = document.querySelector(".content__explorer-name");
+    let jobExplorer = document.querySelector(".content__explorer-job");
+    let imageExplorer = document.querySelector(".content__explorer-image-image");
+  
+    nameExplorer.textContent = data.name;
+    jobExplorer.textContent = data.about;
+    imageExplorer.src = data.avatar;
+  })
+  .catch((err) =>{
+    console.log('Error en la solicitud: ',err);
+  })
+  .finally(() =>{
+    console.log('Petición explorer terminada');
+  });
+};
+
+searchUser(groupId,token);
+
+/**
+ * Funcion que obtiene la cantidad de likes de cada tarjeta
+ */
+function showLikes(likes){
+  likes.forEach((data) =>{
+    const key = Object.keys(data)[0]; 
+    const val = data[key];
+    //console.log(`Lugar: ${key} - Likes: ${val}`);
+  });
+}
+
+
+function openConfirm(selector){
+  const confirmWindow = document.querySelector('#confirm__window').classList.add('popup__window-enabled');
+};
+
