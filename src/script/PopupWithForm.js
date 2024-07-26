@@ -24,8 +24,6 @@ class PopupWithForm extends Popup {
         evt.preventDefault();
         this._handleFormSubmit(this._getInputValues());
       });
-    } else {
-      console.log('Form element is not found.');
     }
   }
 

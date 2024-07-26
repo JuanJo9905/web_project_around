@@ -18,11 +18,16 @@
       <main class="content">
         <section class="explorer">
           <div class="content__explorer">
+            <!--
             <img
               src="<%=require('./images/Avatar.png')%>"
               class="content__explorer-image-image"
               alt="avatar"
             />
+            -->
+            <div class="content__explorer-image">
+              <button class="content__explorer-image-button"></button>
+            </div>
             <div class="content__explorer-info">
               <div class="content__explorer-info-top">
                 <h2 class="content__explorer-name">Jacques Costeau</h2>
@@ -163,6 +168,33 @@
             </form>
           </div>
           <img src="<%=require('./images/Close_Icon.png')%>" class="popup__close popup__close-small" id="confirm__close" alt="close" />
+        </section>
+        <section class="popup" id="editAvatar">
+          <div class="popup__overlay" id="editAvatar__overlay"></div>
+          <div class="popup__window" id="editAvatar__window">
+            <h2 class="popup__window-title" id="editAvatar__window-title">Cambiar foto de perfil</h2>
+            <form class="popup__window-form popup__form" id="editAvatar__window-form" novalidate>
+              <input
+                type="url"
+                id="editAvatar__window-form-link"
+                class="popup__window-form-input popup__input"
+                name="editAvatar__window-form-link"
+                placeholder="Enlace a la imagen"
+                required
+              />
+              <span
+                id="editAvatar__window-form-link-error"
+                class="popup__window-error"
+              ></span>
+              <button 
+                type="submit" 
+                id="editAvatar__window-form-button"
+                class="popup__window-form-button popup__button">
+                Guardar
+              </button>
+            </form>
+          </div>
+          <img src="<%=require('./images/Close_Icon.png')%>" class="popup__close" id="editAvatar__close" alt="close" />
         </section>
       </main>
       <footer>

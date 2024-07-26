@@ -271,7 +271,50 @@ function showLikes(likes){
 }
 
 
-function openConfirm(selector){
-  const confirmWindow = document.querySelector('#confirm__window').classList.add('popup__window-enabled');
-};
 
+const EditAvatarContainer = document.querySelector("#editAvatar");
+const saveAvatar = EditAvatarContainer.querySelector(".popup__window-form-button");
+const editAvatarButton = document.querySelector(".content__explorer-image-button");
+const popupEditAvatar = new PopupWithForm('#editAvatar', changeAvatarImage);
+editAvatarButton.addEventListener("click", function () {
+  popupEditAvatar.open();
+});
+
+function changeAvatarImage() {
+  console.log('Cambiar imagen');
+  let image = EditAvatarContainer.querySelector("#editAvatar__window-form-link");
+  let profileImage = document.querySelector(".content__explorer-image");
+  console.log(image.value);
+  //Envío del formulario al servidor
+  fetch(`https://around.nomoreparties.co/v1/${groupId}/users/me/avatar`, {
+      method: "PATCH",
+      headers: {
+        authorization: token,
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        avatar: image.value
+      })
+    })
+    .then((res) => {
+      if (res.ok) {
+        return res.json();
+      }
+      return Promise.reject(res.status);
+    })
+    .catch((err) =>{
+      console.log('Error en la solicitud: ',err);
+    })
+    .finally(() =>{
+      console.log('Imagen actualizada');
+    });
+  
+
+    const style = document.createElement('style');  
+    style.innerHTML = `.content__explorer-image.new-background::before { background-image: url('${image.value}'); }`;
+    document.head.appendChild(style);  
+    profileImage.classList.add('new-background');
+    popupEditAvatar.close();
+  }
+
+  saveAvatar.addEventListener("click", changeAvatarImage);

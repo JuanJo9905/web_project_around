@@ -59,13 +59,60 @@
   font-size: 1.5vw;
 }
 
-.content__explorer-image{
-  width: 14%;
-  height: 100%;
-}
 .content__explorer-image-image{
   padding-right: 2.5%;
   width: 10vw;
+}
+
+.content__explorer-image {
+  padding-right: 2.5%;
+  width: 10vw;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+}
+
+.content__explorer-image::before {
+  background-image: url('../images/Avatar.png');
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  opacity: 1;
+  z-index: 1;
+  transition: opacity 0.3s ease; /*Efecto de transicion*/
+  border-radius: 50%;
+}
+
+.content__explorer-image-button {
+  background: url('../images/editar.png') center no-repeat;
+  background-size: 30%;
+  height: 100%;
+  width: 100%;
+  border: none;
+  opacity: 0;
+  position: relative;
+  z-index: 2;
+}
+
+.content__explorer-image:hover::before {
+  opacity: 0.5;
+}
+
+.content__explorer-image-button:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+.content__explorer-image.new-background::before {
+  background-image: url('../images/Avatar.png');
 }
 
 .content__explorer-add-enable{
