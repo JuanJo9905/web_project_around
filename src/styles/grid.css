@@ -43,16 +43,12 @@
   cursor: pointer;
 }
 
-.content__grid-card-name {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  overflow: hidden;
-  width: 70%;
-}
 
 .content__grid-card-description {
-  display: flex;
+  display: flex; 
+  flex-direction: row;
   justify-content: space-between;
+  align-items: center;
   color: black;
   background-color: #fff;
   padding: 0 5%;
@@ -61,6 +57,27 @@
   border-radius: 0 0 10px 10px;
 }
 
+.content__grid-card-name {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 70%;
+}
+
+.content__grid-card-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center; 
+}
+
+.content__grid-like {
+  bottom: 25px;
+}
+
+.content__grid-number {
+ margin-bottom: 3px;
+ margin-right: 12px; 
+}
 /*POSTER*/
 .content__grid-poster {
   top: 13vh;

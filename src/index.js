@@ -1,8 +1,9 @@
+import "./styles/index.css";
 import Card from "./script/Card.js";
 import FormValidator from "./script/FormValidator.js";
 import PopupWithForm from "./script/PopupWithForm.js";
 import UserInfo from "./script/UserInfo.js";
-import "./styles/index.css";
+import Api from "./script/Api.js";
 
 const groupId = "web_es_11";
 const token = "2b046d27-e300-4552-a820-76fed2ad182a";
@@ -37,44 +38,44 @@ document.addEventListener("DOMContentLoaded", () => {
 const contenedor_imagenes = document.querySelector(".content__grid");
 let likes = [];
 async function getImages(){
-  let images = await fetch(`https://around.nomoreparties.co/v1/${groupId}/cards`,{
-    headers:{
-      'Authorization':token
-    }
-  })
-  .then((res) => {
-    if(res.ok){
-      return res.json();
-    }
-    return Promise.reject(res.status);
-  })
-  .then((data)=>{
-    console.log('Imagenes Cargadas: ',data);
-    data.forEach((image)=>{
-      const card = new Card(
-        image.name,
-        image.link,
-        image._id,
-        "./images/Trash.svg",
-        "#content__grid",
-        handleCardClick
-      );
-      contenedor_imagenes.appendChild(card.obtenerElementoCard());
-      likes.push({[image.name]:image.likes.length});
-      if (image.owner._id != '9c29dd25ee3a3c6151ca4cf7'){
-        card.eliminarIconoEliminar();
-      }
-    });
-  })
-  .catch((err)=>{
-    console.log(err);
-  })  
-  .finally(() =>{
-    console.log('Petición images terminada');
-    showLikes(likes);
 
-  })
-  ;
+  const api = new Api(
+    {
+      baseUrl:`https://around.nomoreparties.co/v1/${groupId}/cards`
+    ,
+    headers:
+    {'Authorization':token}
+    });
+
+  api.getInitialCards()
+    .then((data)=>{
+      console.log('Imagenes Cargadas: ',data);
+      data.forEach((image)=>{
+        const card = new Card(
+          image.name,
+          image.link,
+          image._id,
+          image.likes.length,
+          "./images/Trash.svg",
+          "#content__grid",
+          handleCardClick
+        );
+        contenedor_imagenes.appendChild(card.obtenerElementoCard());
+        likes.push({[image.name]:image.likes.length});
+
+        if (image.owner._id != '9c29dd25ee3a3c6151ca4cf7'){
+          card.eliminarIconoEliminar();
+        }
+      });
+    })
+    .catch((err)=>{
+      console.log(err);
+    })  
+    .finally(() =>{
+      console.log('Petición images terminada');
+      showLikes(likes);
+    })
+    ;
 
 };
 getImages();
@@ -143,23 +144,20 @@ function addCard() {
 
   let imageEnvio = image.value;
   let nameEnvio = name.value;
-  //Envío del formulario al servidor
-  fetch(`https://around.nomoreparties.co/v1/${groupId}/cards`, {
-      method: "POST",
-      headers: {
-        authorization: token,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        name: nameEnvio,
-        link: imageEnvio
-      })
-    })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(res.status);
+
+  const api = new Api(
+    {
+      baseUrl:`https://around.nomoreparties.co/v1/${groupId}/cards`
+    ,
+    headers:
+    {
+      authorization: token,
+      "Content-Type": "application/json"
+    }
+    });
+    api.addCard({
+      name: nameEnvio,
+      link: imageEnvio
     })
     .catch((err) =>{
       console.log('Error en la solicitud: ',err);
@@ -172,6 +170,8 @@ function addCard() {
   const card = new Card(
       name.value,
       image.value,
+      '',
+      0,
       "./images/Trash.svg",
       "#content__grid",
       handleCardClick
@@ -191,34 +191,36 @@ function editExplorer() {
   let nameExplorer = document.querySelector(".content__explorer-name");
   let jobExplorer = document.querySelector(".content__explorer-job");
 
-  nameExplorer.textContent = name.value;
-  jobExplorer.textContent = job.value;
-  editWindow.classList.remove("popup__enabled");
+  let button = editWindow.querySelector(".popup__window-form-button");
+  button.textContent = 'Guardando ...';
 
-  //Envio de la info al servidor
-  fetch(`https://around.nomoreparties.co/v1/${groupId}/users/me`, {
-    method: "PATCH",
-    headers: {
+
+  const api = new Api(
+    {
+      baseUrl:`https://around.nomoreparties.co/v1/${groupId}/users/me`
+    ,
+    headers:
+    {
       authorization: token,
       "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
+    }
+    });
+    api.setUserInfo({
       name: name.value,
       about: job.value
     })
-  })  
-  .then((res) => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(res.status);
-  })
-  .catch((err) =>{
-    console.log('Error en la solicitud: ',err);
-  })
-  .finally(() =>{
-    console.log('Edicion terminada');
-  });
+    .then((data) =>{
+      nameExplorer.textContent = name.value;
+      jobExplorer.textContent = job.value;
+      button.textContent = 'Guardar';
+      editWindow.classList.remove("popup__enabled");
+    })
+    .catch((err) =>{
+      console.log('Error en la solicitud: ',err);
+    })
+    .finally(() =>{
+      console.log('Edicion terminada');
+    });
   }
 
 saveCard.addEventListener("click", addCard);
@@ -229,32 +231,30 @@ saveEdit.addEventListener("click", editExplorer);
  * Obtener la información del servidor
 */
 function searchUser(groupId,token){
-  fetch(`https://around.nomoreparties.co/v1/${groupId}/users/me`,{
-    headers:{
-      'Authorization': token
-    }
-  })
-  .then((res) => {
-    if (res.ok) {
-      return res.json();
-    }
-    return Promise.reject(res.status);
-  })
-  .then((data) => {
-    let nameExplorer = document.querySelector(".content__explorer-name");
-    let jobExplorer = document.querySelector(".content__explorer-job");
-    let imageExplorer = document.querySelector(".content__explorer-image-image");
-  
-    nameExplorer.textContent = data.name;
-    jobExplorer.textContent = data.about;
-    imageExplorer.src = data.avatar;
-  })
-  .catch((err) =>{
-    console.log('Error en la solicitud: ',err);
-  })
-  .finally(() =>{
-    console.log('Petición explorer terminada');
-  });
+  const api = new Api(
+    {
+      baseUrl:`https://around.nomoreparties.co/v1/${groupId}/users/me`
+    ,
+    headers:
+    {'Authorization':token}
+    });  
+
+    api.getUserInfo()
+    .then((data) => {
+      let nameExplorer = document.querySelector(".content__explorer-name");
+      let jobExplorer = document.querySelector(".content__explorer-job");
+      let imageExplorer = document.querySelector(".content__explorer-image-image");
+    
+      nameExplorer.textContent = data.name;
+      jobExplorer.textContent = data.about;
+      imageExplorer.src = data.avatar;
+    })
+    .catch((err) =>{
+      console.log('Error en la solicitud: ',err);
+    })
+    .finally(() =>{
+      console.log('Petición explorer terminada');
+    });
 };
 
 searchUser(groupId,token);
@@ -271,7 +271,9 @@ function showLikes(likes){
 }
 
 
-
+/**
+ * Edición de la foto de perfil
+ */
 const EditAvatarContainer = document.querySelector("#editAvatar");
 const saveAvatar = EditAvatarContainer.querySelector(".popup__window-form-button");
 const editAvatarButton = document.querySelector(".content__explorer-image-button");
@@ -284,23 +286,19 @@ function changeAvatarImage() {
   console.log('Cambiar imagen');
   let image = EditAvatarContainer.querySelector("#editAvatar__window-form-link");
   let profileImage = document.querySelector(".content__explorer-image");
-  console.log(image.value);
-  //Envío del formulario al servidor
-  fetch(`https://around.nomoreparties.co/v1/${groupId}/users/me/avatar`, {
-      method: "PATCH",
-      headers: {
-        authorization: token,
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        avatar: image.value
-      })
-    })
-    .then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(res.status);
+
+  const api = new Api(
+    {
+      baseUrl:`https://around.nomoreparties.co/v1/${groupId}/users/me/avatar`
+    ,
+    headers:
+    {
+      authorization: token,
+      "Content-Type": "application/json"
+    }
+    });
+    api.updateAvatar({
+      avatar: image.value
     })
     .catch((err) =>{
       console.log('Error en la solicitud: ',err);
@@ -309,7 +307,6 @@ function changeAvatarImage() {
       console.log('Imagen actualizada');
     });
   
-
     const style = document.createElement('style');  
     style.innerHTML = `.content__explorer-image.new-background::before { background-image: url('${image.value}'); }`;
     document.head.appendChild(style);  
