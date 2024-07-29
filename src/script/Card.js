@@ -64,6 +64,7 @@ class Card {
         api.likeCard()
           .then((data)=>{
             likeButton.classList.add('content__grid-like-active');
+            this._elementoCard.querySelector('.content__grid-number').textContent = this.likes + 1;
             console.log('Like añadido');  
           })
           .catch((err)=>{
@@ -83,6 +84,7 @@ class Card {
       api.dislikeCard()
         .then((data)=>{
           likeButton.classList.remove('content__grid-like-active');
+          this._elementoCard.querySelector('.content__grid-number').textContent = this.likes;
           console.log('Like removido');  
         })
         .catch((err)=>{
